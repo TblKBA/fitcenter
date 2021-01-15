@@ -1,65 +1,74 @@
 from django.db import models
 
 
-class CarPlan(models.Model):
-    plan_name = models.CharField(max_length=20)
-    warranty = models.PositiveIntegerField(default=1)
+# class CarPlan(models.Model):
+#     plan_name = models.CharField(max_length=20)
+#     warranty = models.PositiveIntegerField(default=1)
+#
+#     def __str__(self):
+#         return self.plan_name
+#
+#
+# class CarSpecs(models.Model):
+#     car_brand = models.CharField(max_length=50)
+#     car_model = models.CharField(max_length=100)
+#     car_plan = models.ForeignKey(
+#         CarPlan, on_delete=models.SET_NULL, null=True
+#     )
+#
+#     def __str__(self):
+#         return self.car_brand
+#
+#
+# class Categories(models.Model):
+#     category_name = models.CharField(max_length=50)
+#
+#     def __str__(self):
+#         return self.category_name
+#
+#
+# class Manufacturers(models.Model):
+#     manufacturer_name = models.CharField(max_length=150)
+#
+#     def __str__(self):
+#         return self.manufacturer_name
+#
+#
+# class Providers(models.Model):
+#     provider_name = models.CharField(max_length=150)
+#
+#     def __str__(self):
+#         return self.provider_name
+#
+#
+# class Supplies(models.Model):
+#     provider_id = models.ForeignKey(
+#         Providers, on_delete=models.CASCADE
+#     )
+#     date = models.DateField()
+#
+#     def __str__(self):
+#         return self.date.strftime("%m/%d/%Y")
 
-    def __str__(self):
-        return self.plan_name
-
-
-class CarSpecs(models.Model):
-    car_brand = models.CharField(max_length=50)
-    car_model = models.CharField(max_length=100)
-    car_plan = models.ForeignKey(
-        CarPlan, on_delete=models.SET_NULL, null=True
+ class Specialization(models.Model):
+     provider_id = models.ForeignKey(
+         Providers, on_delete=models.CASCADE
     )
-
-    def __str__(self):
-        return self.car_brand
-
-
-class Categories(models.Model):
-    category_name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.category_name
-
-
-class Manufacturers(models.Model):
-    manufacturer_name = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.manufacturer_name
-
-
-class Providers(models.Model):
-    provider_name = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.provider_name
-
-
-class Supplies(models.Model):
-    provider_id = models.ForeignKey(
-        Providers, on_delete=models.CASCADE
-    )
-    date = models.DateField()
+     date = models.DateField()
 
     def __str__(self):
         return self.date.strftime("%m/%d/%Y")
 
 
-class Products(models.Model):
+class Services(models.Model):
     category_id = models.ForeignKey(
-        Categories, on_delete=models.CASCADE
+        Specialization, on_delete=models.CASCADE
     )
     manufacturer_id = models.ForeignKey(
-        Manufacturers, on_delete=models.SET_NULL, null=True
+        Specialization, on_delete=models.SET_NULL, null=True
     )
     supply_id = models.ForeignKey(
-        Supplies, on_delete=models.SET_NULL, null=True
+        Specialization, on_delete=models.SET_NULL, null=True
     )
     product_name = models.CharField(max_length=150)
     product_desc = models.CharField(max_length=500)

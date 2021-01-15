@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny
 from .permissions import IsAdminOrReadOnly
 from rest_framework import viewsets
 from .serializer import CategoriesSerializer, ManufacturersSerializer, ProductsSerializer, ProvidersSerializer, SuppliesSerializer, AccountsSerializer, SellersSerializer, CustomersSerializer
-from firstApp.models import CarSpecs, CarPlan, Categories, Manufacturers, Products, Providers, Supplies, Accounts, Sellers, Customers
+from API.models import CarSpecs, CarPlan, Categories, Manufacturers, Products, Providers, Supplies, Accounts, Sellers, Customers
 
 
 @api_view()

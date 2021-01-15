@@ -1,5 +1,5 @@
 from import_export import resources
-from firstApp.models import Categories, Manufacturers, Products, Providers, Supplies, Accounts, Sellers, Customers
+from API.models import Categories, Manufacturers, Products, Providers, Supplies, Accounts, Sellers, Customers
 
 
 class CategoriesResource(resources.ModelResource):

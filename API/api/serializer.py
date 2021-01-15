@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from firstApp.models import CarSpecs, CarPlan, Categories, Manufacturers, Products, Providers, Supplies, Accounts, \
+from API.models import CarSpecs, CarPlan, Categories, Manufacturers, Products, Providers, Supplies, Accounts, \
     Sellers, Customers
 
 
