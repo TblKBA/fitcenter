@@ -3,8 +3,11 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from .permissions import IsAdminOrReadOnly
 from rest_framework import viewsets
-from .serializer import CategoriesSerializer, ManufacturersSerializer, ProductsSerializer, ProvidersSerializer, SuppliesSerializer, AccountsSerializer, SellersSerializer, CustomersSerializer
-from firstApp.models import CarSpecs, CarPlan, Categories, Manufacturers, Products, Providers, Supplies, Accounts, Sellers, Customers
+from .serializer import CustomersSerializer, SubscriptionsSerializer, SellSubscriptionsSerializer, \
+    RegistrationVisitsSerializer, StaffSerializer, ServicesSerializer, KindSportSerializer, RoomsSerializer, \
+    TimetableSerializer
+from API.models import Customers, Subscriptions, SellSubscriptions, RegistrationVisits, Staff, Services, KindSport, \
+    Rooms, Timetable
 
 
 @api_view()
@@ -15,72 +18,81 @@ def firstFunction(request):
 
 
 @permission_classes([IsAdminOrReadOnly])
-class CategoriesViewset(viewsets.ModelViewSet):
-    serializer_class = CategoriesSerializer
-
-    def get_queryset(self):
-        categories = Categories.objects.all()
-        return categories
-
-
-@permission_classes([IsAdminOrReadOnly])
-class ManufacturersViewset(viewsets.ModelViewSet):
-    serializer_class = ManufacturersSerializer
-
-    def get_queryset(self):
-        manufacturers = Manufacturers.objects.all()
-        return manufacturers
-
-
-@permission_classes([IsAdminOrReadOnly])
-class ProductsViewset(viewsets.ModelViewSet):
-    serializer_class = ProductsSerializer
-
-    def get_queryset(self):
-        products = Products.objects.all()
-        return products
-
-
-@permission_classes([IsAdminOrReadOnly])
-class ProvidersViewset(viewsets.ModelViewSet):
-    serializer_class = ProvidersSerializer
-
-    def get_queryset(self):
-        providers = Providers.objects.all()
-        return providers
-
-
-@permission_classes([IsAdminOrReadOnly])
-class SuppliesViewset(viewsets.ModelViewSet):
-    serializer_class = SuppliesSerializer
-
-    def get_queryset(self):
-        supplies = Supplies.objects.all()
-        return supplies
-
-
-@permission_classes([IsAdminOrReadOnly])
-class AccountsViewset(viewsets.ModelViewSet):
-    serializer_class = AccountsSerializer
-
-    def get_queryset(self):
-        accounts = Accounts.objects.all()
-        return accounts
-
-
-@permission_classes([IsAdminOrReadOnly])
-class SellersViewset(viewsets.ModelViewSet):
-    serializer_class = SellersSerializer
-
-    def get_queryset(self):
-        sellers = Sellers.objects.all()
-        return sellers
-
-
-@permission_classes([IsAdminOrReadOnly])
 class CustomersViewset(viewsets.ModelViewSet):
     serializer_class = CustomersSerializer
 
     def get_queryset(self):
         customers = Customers.objects.all()
         return customers
+
+
+@permission_classes([IsAdminOrReadOnly])
+class SubscriptionsViewset(viewsets.ModelViewSet):
+    serializer_class = SubscriptionsSerializer
+
+    def get_queryset(self):
+        subscriptions = Subscriptions.objects.all()
+        return subscriptions
+
+
+@permission_classes([IsAdminOrReadOnly])
+class SellSubscriptionsViewset(viewsets.ModelViewSet):
+    serializer_class = SellSubscriptionsSerializer
+
+    def get_queryset(self):
+        sellSubscriptions = SellSubscriptions.objects.all()
+        return sellSubscriptions
+
+
+@permission_classes([IsAdminOrReadOnly])
+class RegistrationVisitsViewset(viewsets.ModelViewSet):
+    serializer_class = RegistrationVisitsSerializer
+
+    def get_queryset(self):
+        registrationVisits = RegistrationVisits.objects.all()
+        return registrationVisits
+
+
+@permission_classes([IsAdminOrReadOnly])
+class StaffViewset(viewsets.ModelViewSet):
+    serializer_class = StaffSerializer
+
+    def get_queryset(self):
+        staff = Staff.objects.all()
+        return staff
+
+
+@permission_classes([IsAdminOrReadOnly])
+class ServicesViewset(viewsets.ModelViewSet):
+    serializer_class = ServicesSerializer
+
+    def get_queryset(self):
+        services = Services.objects.all()
+        return services
+
+
+@permission_classes([IsAdminOrReadOnly])
+class KindSportViewset(viewsets.ModelViewSet):
+    serializer_class = KindSportSerializer
+
+    def get_queryset(self):
+        kindSport = KindSport.objects.all()
+        return kindSport
+
+
+@permission_classes([IsAdminOrReadOnly])
+class RoomsViewset(viewsets.ModelViewSet):
+    serializer_class = RoomsSerializer
+
+    def get_queryset(self):
+        rooms = Rooms.objects.all()
+        return rooms
+
+
+@permission_classes([IsAdminOrReadOnly])
+class TimetableViewset(viewsets.ModelViewSet):
+    serializer_class = TimetableSerializer
+
+    def get_queryset(self):
+        timetable = Timetable.objects.all()
+        return timetable

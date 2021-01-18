@@ -1,43 +1,47 @@
 from import_export import resources
-from firstApp.models import Categories, Manufacturers, Products, Providers, Supplies, Accounts, Sellers, Customers
-
-
-class CategoriesResource(resources.ModelResource):
-    class Meta:
-        model = Categories
-
-
-class ManufacturersResource(resources.ModelResource):
-    class Meta:
-        model = Manufacturers
-
-
-class ProductsResource(resources.ModelResource):
-    class Meta:
-        model = Products
-
-
-class ProvidersResource(resources.ModelResource):
-    class Meta:
-        model = Providers
-
-
-class SuppliesResource(resources.ModelResource):
-    class Meta:
-        model = Supplies
-
-
-class AccountsResource(resources.ModelResource):
-    class Meta:
-        model = Accounts
-
-
-class SellersResource(resources.ModelResource):
-    class Meta:
-        model = Sellers
+from API.models import Customers, Subscriptions, SellSubscriptions, RegistrationVisits, Staff, Services, KindSport, \
+    Rooms, Timetable
 
 
 class CustomersResource(resources.ModelResource):
     class Meta:
         model = Customers
 
+
+class SubscriptionsResource(resources.ModelResource):
+    class Meta:
+        model = Subscriptions
+
+
+class SellSubscriptionsResource(resources.ModelResource):
+    class Meta:
+        model = SellSubscriptions
+
+
+class RegistrationVisitsResource(resources.ModelResource):
+    class Meta:
+        model = RegistrationVisits
+
+
+class StaffResource(resources.ModelResource):
+    class Meta:
+        model = Staff
+
+
+class ServicesResource(resources.ModelResource):
+    class Meta:
+        model = Services
+
+
+class KindSportResource(resources.ModelResource):
+    class Meta:
+        model = KindSport
+
+
+class RoomsResource(resources.ModelResource):
+    class Meta:
+        model = Rooms
+
+class TimetableResource(resources.ModelResource):
+    class Meta:
+        model = Timetable

@@ -13,91 +13,86 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='CarPlan',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('plan_name', models.CharField(max_length=20)),
-                ('warranty', models.PositiveIntegerField(default=1)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Categories',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('category_name', models.CharField(max_length=50)),
-            ],
-        ),
-        migrations.CreateModel(
             name='Customers',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150)),
-                ('phone_number', models.CharField(max_length=15)),
+                ('fio', models.CharField(max_length=250)),
+                ('address', models.CharField(max_length=150)),
+                ('phone', models.CharField(max_length=15)),
             ],
         ),
         migrations.CreateModel(
-            name='Manufacturers',
+            name='Subscriptions',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('manufacturer_name', models.CharField(max_length=150)),
+                ('subscription_name', models.CharField(max_length=150)),
+                ('price', models.CharField(max_length=5)),
+                ('visits', models.CharField(max_length=5)),
+                ('days', models.CharField(max_length=5)),
             ],
         ),
         migrations.CreateModel(
-            name='Providers',
+            name='SellSubscriptions',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('provider_name', models.CharField(max_length=150)),
+                ('customer_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='API.customers')),
+                ('subscription_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='API.subscriptions')),
+                ('date_start', models.DateField()),
+                ('date_end', models.DateField()),
             ],
         ),
-        migrations.CreateModel(
-            name='Sellers',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150)),
-                ('position', models.CharField(max_length=150)),
-                ('passport', models.CharField(max_length=150)),
-                ('phone_number', models.CharField(max_length=15)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Supplies',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField()),
-                ('provider_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='firstApp.providers')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Products',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('product_name', models.CharField(max_length=150)),
-                ('product_desc', models.CharField(max_length=500)),
-                ('product_price', models.CharField(max_length=50)),
-                ('category_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='firstApp.categories')),
-                ('manufacturer_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='firstApp.manufacturers')),
-                ('supply_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='firstApp.supplies')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='CarSpecs',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('car_brand', models.CharField(max_length=50)),
-                ('car_model', models.CharField(max_length=100)),
-                ('car_plan', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='firstApp.carplan')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Accounts',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.PositiveIntegerField(default=1)),
-                ('discount', models.CharField(max_length=10)),
-                ('date', models.DateField()),
-                ('customer_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='firstApp.customers')),
-                ('product_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='firstApp.products')),
-                ('seller_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='firstApp.sellers')),
-            ],
-        ),
+         migrations.CreateModel(
+             name='Staff',
+             fields=[
+                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                 ('fio', models.CharField(max_length=250)),
+                 ('address', models.CharField(max_length=150)),
+                 ('birthday', models.DateField()),
+                 ('salary', models.CharField(max_length=5)),
+             ],
+         ),
+         migrations.CreateModel(
+             name='Services',
+             fields=[
+                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                 ('service_name', models.CharField(max_length=150)),
+             ],
+         ),
+         migrations.CreateModel(
+             name='KindSport',
+             fields=[
+                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                 ('staff_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='API.staff')),
+                 ('service_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='API.services')),
+                 ('note', models.CharField(max_length=500, default='...')),
+             ],
+         ),
+         migrations.CreateModel(
+             name='Rooms',
+             fields=[
+                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                 ('room_name', models.CharField(max_length=150)),
+             ],
+         ),
+         migrations.CreateModel(
+             name='Timetable',
+             fields=[
+                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                 ('timetable_date', models.DateField()),
+                 ('start_time', models.TimeField()),
+                 ('end_time', models.TimeField()),
+                 ('service_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='API.services')),
+                 ('room_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='API.rooms')),
+                 ('staff_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='API.kindsport')),
+                 ('note', models.CharField(max_length=500, default='...')),
+             ],
+         ),
+         migrations.CreateModel(
+             name='RegistrationVisits',
+             fields=[
+                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                 ('sellSubscription_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='API.sellsubscriptions')),
+                 ('timetable_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='API.timetable')),
+             ],
+         ),
     ]
